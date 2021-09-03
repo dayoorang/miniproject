@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container m-3 mx-auto">
+        <div class="row">
+            <div class="col">
+                    <div class="card border-success mb-3" style="max-width: 120rem;">
+                      <div class="card-header bg-transparent border-success">
+                        <h5 class="card-title text-success text-center">
+                            {{ form.sex.label }}
+                        </h5>
+
+                        <div class="text-center">
+                            {{ form.sex }}
+                        </div>
+                      </div>
+                          <div class="card-body text-success text-center">
+                                <label>
+                                    <img src="{% static 'image/animal.jpg' %}">
+                                    {{ form.image }}
+                                </label>
+                          </div>
+
+                    </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{#            <img src="{% static 'image/face.jpg' %}" alt="">#}
+{#                <div>{{ form.image.label }}</div>#}
+{#                <input type="image">#}
+{#                        {{ form.image}}#}
+{#                </input>#}
+{##}
+{#                <label for="id_image">Image :</label>#}
+{#                <input id="id_image" type="image" src="{% static 'image/face.jpg' %}" name="image" maxlength="100" required>#}
+{#            </p>#}
+

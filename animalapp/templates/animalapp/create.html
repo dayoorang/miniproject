@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container m-3 mx-auto">
+        <div class="row">
+            <div class="col">
+                 <form method="POST" action="{% url 'animalapp:create' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                     <div class="button--loading" >
+                        <div class="card border-success mb-3" style="max-width: 18rem;">
+                          <div class="card-header bg-transparent border-success">
+                            <h5 class="card-title text-success text-center">
+                                {{ form.sex.label }}
+                            </h5>
+
+                            <div class="text-center">
+                                {{ form.sex }}
+                            </div>
+                          </div>
+                          <div class="card-body text-success text-center" >
+                                <h5 class="card-title" id="preview_text">Add your image</h5>
+                                <label class="image-preview spinner-postion" id="imagePreview">
+                                    <img src="{% static 'image/face.jpg' %}"
+                                         alt="Image Preview"
+                                         class="image-preview__image"
+                                         style="width: 100%;">
+                                    {{ form.image }}
+                                </label>
+    {#                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>#}
+                          </div>
+                          <div class="card-footer bg-transparent border-success text-center">
+                              <input class="btn btn-outline-success" id="btnFEtch" type="submit" value="Go!">
+                          </div>
+                        </div>
+                     </div>
+
+                 </form>
+            </div>
+        </div>
+    </div>
+
+{#<div class="spinner-border" role="status">#}
+{#  <span class="visually-hidden">Loading...</span>#}
+{#</div>#}
+
+    <script>
+        const inpFile = document.getElementById("inpFile");
+        const previewContainer = document.getElementById("imagePreview");
+        const previewText = document.getElementById("preview_text");
+        const previewImage = previewContainer.querySelector(".image-preview__image");
+
+
+        inpFile.addEventListener("change", function () {
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader()
+
+                previewImage.style.display = "block";
+                previewText.innerHTML = '';
+
+                reader.addEventListener("load", function() {
+                    previewImage.setAttribute("src", this.result);
+                });
+
+                reader.readAsDataURL(file);
+            } else {
+                previewDefaultText.style.display = null;
+                previewImage.style.display = null;
+            }
+
+
+        })
+
+
+    </script>
+
+
+{% endblock %}
+
+{#            <img src="{% static 'image/face.jpg' %}" alt="">#}
+{#                <div>{{ form.image.label }}</div>#}
+{#                <input type="image">#}
+{#                        {{ form.image}}#}
+{#                </input>#}
+{##}
+{#                <label for="id_image">Image :</label>#}
+{#                <input id="id_image" type="image" src="{% static 'image/face.jpg' %}" name="image" maxlength="100" required>#}
+{#            </p>#}
+
